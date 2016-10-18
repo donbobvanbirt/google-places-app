@@ -34,16 +34,22 @@ export default class CloseByList extends Component {
   render() {
     let { places } = this.state;
     console.log('places', places)
-    let Places = ''
+    let Places, MapImg, markers = ''
     if (!places) {
-      Places = (
-        <h4>You Are in the Middle of Nowhere!</h4>
-      )
+      Places = '';
     } else {
-       Places = places.map( place => {
-        let { icon, name , id , reference , vicinity} = place ;
+      // let { lat, lng } = places[0].geometry.location;
+      markers = ``
+
+      Places = places.map( (place, i) => {
+        let { icon, name , id , reference , vicinity, geometry } = place;
+        let { lat, lng } = geometry.location;
+        let letterIndex = String.fromCharCode(65 + i);
+        console.log('letterIndex', letterIndex);
+        markers += `markers=color:blue%7Clabel:${letterIndex}%7C${lat},${lng}&`
         return (
-          <List.Item key = {id}>
+          <List.Item key={id} value={letterIndex}>
+            {/* <List.Content value>{letterIndex}</List.Content> */}
             <Image avatar src={icon} />
             <List.Content>
               <List.Header>{name}</List.Header>
@@ -52,11 +58,15 @@ export default class CloseByList extends Component {
           </List.Item>
         )
       })
+      MapImg = (
+        <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${places[0].vicinity}&zoom=13&size=600x300&maptype=roadmap&${markers}key=${process.env.API_KEY}`} alt={places[0].vicinity}/>
+      )
     }
 
     return (
-      <List relaxed animated verticalAlign='middle'>
+      <List relaxed animated ordered verticalAlign='middle'>
         <h3>Places:</h3>
+        {MapImg}
         {Places}
       </List>
     )
