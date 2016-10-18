@@ -48,11 +48,11 @@ export default class CloseByList extends Component {
         console.log('letterIndex', letterIndex);
         markers += `markers=color:blue%7Clabel:${letterIndex}%7C${lat},${lng}&`
         return (
-          <List.Item key={id} value={letterIndex}>
+          <List.Item key={id}>
             {/* <List.Content value>{letterIndex}</List.Content> */}
             <Image avatar src={icon} />
             <List.Content>
-              <List.Header>{name}</List.Header>
+              <List.Header>{letterIndex} - {name}</List.Header>
               <List.Description>{vicinity}</List.Description>
             </List.Content>
           </List.Item>
@@ -64,7 +64,7 @@ export default class CloseByList extends Component {
     }
 
     return (
-      <List relaxed animated ordered verticalAlign='middle'>
+      <List relaxed animated verticalAlign='middle'>
         <h3>Places:</h3>
         {MapImg}
         {Places}
