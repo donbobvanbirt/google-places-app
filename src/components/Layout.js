@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import classNames from 'classnames'
 
 import Search from './Search'
+import List from './List'
 
 export default class Layout extends Component {
   constructor() {
@@ -25,6 +26,7 @@ export default class Layout extends Component {
           </Menu.Menu>
         </Menu>
         <div className="container">
+          <List />
           {this.props.children}
         </div>
       </div>

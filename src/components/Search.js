@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router'
 import { Button } from 'semantic-ui-react'
 
 import MapActions from '../actions/MapActions'
-
 export default class Search extends Component {
 
   submitSearch(e) {
     e.preventDefault()
     let { input } = this.refs;
     console.log("input.value", input.value)
+    // browserHistory.push(`search/${input.value}`)
     MapActions.searchLocation(input.value)
   }
 

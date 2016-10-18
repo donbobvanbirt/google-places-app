@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../AppDispatcher'
 
-let pos = null;
+let infoList = null;
 
 class MapStore extends EventEmitter {
   constructor() {
@@ -10,7 +10,7 @@ class MapStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch (action.type) {
         case 'GOT_PLACES':
-          pos = action.payload;
+          infoList = action.payload;
           this.emit('CHANGE');
           break;
       }
@@ -25,8 +25,8 @@ class MapStore extends EventEmitter {
     this.removeListener('CHANGE',cb)
   }
 
-  getDefaultPosition() {
-    return defaultPos
+  getList() {
+    return infoList;
   }
 }
 

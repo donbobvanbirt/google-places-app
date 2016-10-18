@@ -7,7 +7,12 @@ router.use((req, res, next) => {
   next()
 })
 
-router.route('/:loc')
+router.route('/map/:loc')
+.get(( req, res ) => {
+  GoogleApi.getMap(req.params.loc, res.handle)
+})
+
+router.route('/list/:loc')
 .get(( req, res ) => {
   GoogleApi.getPlaces(req.params.loc, res.handle)
 })

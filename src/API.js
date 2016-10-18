@@ -17,7 +17,7 @@ const API = {
 
   searchPlaces(pos) {
     let coord = `${pos.lat},${pos.lng}`;
-    get(`/api/places/${coord}`)
+    get(`/api/places/list/${coord}`)
     .then(res => {
       let { data } = res;
       ServerActions.gotPlaces(data.results)
